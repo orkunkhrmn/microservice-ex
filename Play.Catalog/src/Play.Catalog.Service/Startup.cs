@@ -14,11 +14,16 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Driver;
+using Play.Catalog.Service.Repositories;
+using Play.Catalog.Service.Settings;
 
 namespace Play.Catalog.Service
 {
     public class Startup
     {
+        private ServiceSettings serviceSettings;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,10 +34,24 @@ namespace Play.Catalog.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // TODO mongo kayıt id sini guid strin şeklinde vermesi için ayar
+            // TODO: mongo kayıt id sini guid strin şeklinde vermesi için ayar
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
-            // TODO mongo tarih string formatlı şeklinde vermesi için ayar
+            // TODO: mongo tarih string formatlı şeklinde vermesi için ayar
             BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
+
+            // TODO: ayarları set etmek için
+            serviceSettings = Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
+
+            // TODO: imongoDatabase inject edebilmek için
+            services.AddSingleton(serviceProvider =>
+            {
+                var mongoDbSettings = Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
+                var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
+                return mongoClient.GetDatabase(serviceSettings.ServiceName);
+            });
+
+            // TODO: inject - declaring
+            services.AddSingleton<IItemsRepository, ItemsRepository>();
 
             services.AddControllers(options =>
             {
