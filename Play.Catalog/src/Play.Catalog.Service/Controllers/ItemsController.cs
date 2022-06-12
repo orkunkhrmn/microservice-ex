@@ -29,5 +29,47 @@ namespace Play.Catalog.Service.Controllers
             var item = items.Where(item => item.Id == id).SingleOrDefault();
             return item;
         }
+
+        // POST /items
+        [HttpPost]
+        public ActionResult<ItemDto> Post(CreateItemDto createItemDto)
+        {
+            var item = new ItemDto(Guid.NewGuid(), createItemDto.Name, createItemDto.Description, createItemDto.Price, DateTimeOffset.UtcNow);
+
+            items.Add(item);
+
+            // TODO: Url Döner "location property" sadece yukarıya istek atmaz ve eklenen item ı döner
+            return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
+        }
+
+        // TODO: Content belli olmadığı IActionResult için
+        // PUT /items/{id}
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, UpdateItemDto updateItemDto)
+        {
+            var existingItem = items.Where(item => item.Id == id).SingleOrDefault();
+
+            var updatedItem = existingItem with
+            {
+                Name = updateItemDto.Name,
+                Description = updateItemDto.Description,
+                Price = updateItemDto.Price
+            };
+
+            var index = items.FindIndex(existingItem => existingItem.Id == id);
+            items[index] = updatedItem;
+
+            return NoContent();
+        }
+
+        // DELETE /items/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var index = items.FindIndex(existingItem => existingItem.Id == id);
+            items.RemoveAt(index);
+
+            return NoContent();
+        }
     }
 }
