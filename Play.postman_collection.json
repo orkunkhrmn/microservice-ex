@@ -1,0 +1,120 @@
+{
+	"id": "68484d73-ff83-40d3-9f0a-de3045b5e4d6",
+	"name": "Play",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"e70f14c1-f4db-4eb9-8285-e0f877cab8d9",
+		"3373841d-b3b5-4704-87bf-6371a33916b0",
+		"a29cb08c-7eec-4dba-abba-7cadaec56705",
+		"c127621e-a3fa-4d6d-b2d4-e7e9112704a3",
+		"3c23ce46-f856-4b5c-bdb0-ad0c77666a8a"
+	],
+	"folders_order": [],
+	"protocolProfileBehavior": {},
+	"folders": [],
+	"requests": [
+		{
+			"id": "3373841d-b3b5-4704-87bf-6371a33916b0",
+			"name": "PostAsync",
+			"url": "{{baseurl}}/items",
+			"description": "",
+			"data": [],
+			"dataOptions": {
+				"raw": {
+					"language": "json"
+				}
+			},
+			"dataMode": "raw",
+			"headerData": [],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"Name\":\"Potion\",\r\n    \"Description\":\"Restore a small amount of Hp\",\r\n    \"Price\":5\r\n}",
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "3c23ce46-f856-4b5c-bdb0-ad0c77666a8a",
+			"name": "DeleteAsync",
+			"url": "{{baseurl}}/items/ece4761c-b277-4034-97db-8c41424ab811",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "a29cb08c-7eec-4dba-abba-7cadaec56705",
+			"name": "GetByIdAsync",
+			"url": "{{baseurl}}/items/ece4761c-b277-4034-97db-8c41424ab811",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "c127621e-a3fa-4d6d-b2d4-e7e9112704a3",
+			"name": "PutAsync",
+			"url": "{{baseurl}}/items/ece4761c-b277-4034-97db-8c41424ab811",
+			"description": "",
+			"data": [],
+			"dataOptions": {
+				"raw": {
+					"language": "json"
+				}
+			},
+			"dataMode": "raw",
+			"headerData": [],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\r\n    \"Name\":\"Potion1\",\r\n    \"Description\":\"Restore a small amount of Hp\",\r\n    \"Price\":5\r\n}",
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "e70f14c1-f4db-4eb9-8285-e0f877cab8d9",
+			"name": "GetAsync",
+			"url": "{{baseurl}}/items",
+			"description": "",
+			"data": null,
+			"dataOptions": null,
+			"dataMode": null,
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		}
+	]
+}
