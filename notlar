@@ -1,3 +1,13 @@
 
 Docker
 docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
+
+Play.Common\src\Play.Common> Yolundan paketlemek için
+dotnet pack -o ..\..\..\packages\
+
+nuget source u eklemek
+dotnet nuget add source C:\orkun\microservice-ex\packages -n PlayEconomy           
+
+Paket
+Eklemek
+dotnet add package Play.Common
