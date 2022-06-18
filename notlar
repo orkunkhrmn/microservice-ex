@@ -14,3 +14,5 @@ dotnet nuget add source C:\orkun\microservice-ex\packages -n PlayEconomy
 Paket
 Eklemek
 dotnet add package Play.Common
+
+code . -r
