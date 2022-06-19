@@ -19,3 +19,7 @@ code . -r
 
 dotnet add package Microsoft.Extensions.Http.Polly
 Policy eklemek için mesela timeout için maksimum bekleme süresi vs. ayarlanabilir.
+
+Play.Catalog.Service
+dotnet add package MassTransit.AspNetCore (dotnet add package MassTransit --version 7.1.3)
+dotnet add package MassTransit.RabbitMQ --version 7.1.3
