@@ -4,6 +4,8 @@ using Play.Common.Settings;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using MassTransit.Definition;
+using System;
+using GreenPipes;
 
 namespace Play.Common.MassTransit
 {
@@ -24,6 +26,10 @@ namespace Play.Common.MassTransit
 
                     configurator.Host(rabbitMQSettings.Host);
                     configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(serviceSettings.ServiceName, false));
+                    configurator.UseMessageRetry(retryConfigurator =>
+                    {
+                        retryConfigurator.Interval(3, TimeSpan.FromSeconds(5)); // TODO eğer comsumerda hata oluşursa 3 kere 5 saniye aralıkla deneme yapar.
+                    });
                 });
             });
 
