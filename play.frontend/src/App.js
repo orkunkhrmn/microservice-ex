@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { BrowserRouter } from 'react-router-dom';
 
 import './App.css';
+import { Catalog } from "./components/Catalog";
 
 export default class App extends Component
 {
@@ -23,6 +24,7 @@ export default class App extends Component
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="catalog" element={<Catalog />} />
           </Route>
         </Routes>
       </BrowserRouter>
