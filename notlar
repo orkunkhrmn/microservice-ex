@@ -16,3 +16,6 @@ Eklemek
 dotnet add package Play.Common
 
 code . -r
+
+dotnet add package Microsoft.Extensions.Http.Polly
+Policy eklemek için mesela timeout için maksimum bekleme süresi vs. ayarlanabilir.
