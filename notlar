@@ -8,6 +8,12 @@ docker-compose up -d
 Play.Common\src\Play.Common> Yolundan paketlemek için
 dotnet pack -o ..\..\..\packages\
 
+contract packaged
+dotnet pack -o ..\..\..\packages\
+
+version olusturma
+dotnet pack -p:PackageVersion=1.0.1 -o ..\..\..\packages\
+
 nuget source u eklemek
 dotnet nuget add source C:\orkun\microservice-ex\packages -n PlayEconomy           
 
