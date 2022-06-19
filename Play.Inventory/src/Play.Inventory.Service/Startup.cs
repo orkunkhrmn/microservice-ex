@@ -47,6 +47,22 @@ namespace Play.Inventory.Service
                         .LogWarning($"Delaying for {timespan.TotalSeconds} seconds, then making retry {retryAttempt}");
                 }
             )) // TODO timeout policyden önce yazılmalı. 5 kere deneme yapar 2 - 4 - 8 - 16 - 32 saniye ara verir (+ timespan ile farklı clientlara farklı aralıkta milisaniye ekleyerek verir) her denemede log atar.
+            .AddTransientHttpErrorPolicy(builder => builder.Or<TimeoutRejectedException>().CircuitBreakerAsync(
+                3,
+                TimeSpan.FromSeconds(15),
+                onBreak: (outcome, timespan) =>
+                {
+                    var serviceProvider = services.BuildServiceProvider();
+                    serviceProvider.GetService<ILogger<CatalogClient>>()
+                        .LogWarning($"Opening circuit for {timespan.TotalSeconds} seconds...");
+                },
+                onReset: () =>
+                {
+                    var serviceProvider = services.BuildServiceProvider();
+                    serviceProvider.GetService<ILogger<CatalogClient>>()
+                        .LogWarning($"Closing the circuit...");
+                }
+            )) // TODO 3 hatadan sonra 15 saniye devre(circuit) keser. yani istek yapılmasını engeller sonra devam eder
             .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1)); // TODO 1 saniye timeout verir
 
             services.AddControllers();
