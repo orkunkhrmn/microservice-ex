@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './App.css';
 import { Catalog } from "./components/Catalog";
+import { ApplicationPaths } from "./components/Constants";
+import { Inventory } from "./components/Inventory";
 
 export default class App extends Component
 {
@@ -24,7 +26,8 @@ export default class App extends Component
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="catalog" element={<Catalog />} />
+            <Route path={ApplicationPaths.CatalogPath} element={<Catalog />} />
+            <Route path={ApplicationPaths.InventoryPath} element={<Inventory />} />
           </Route>
         </Routes>
       </BrowserRouter>

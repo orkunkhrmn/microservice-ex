@@ -61,13 +61,13 @@ export default class GrantItemFrom extends React.Component
                 if (!response.ok)
                 {
                     const errorData = await response.json();
-                    console.log(errorData);
+                    console.error(errorData);
                     throw new Error(`Could not grant the item: ${errorData.title}`);
                 }
 
                 this.props.toggle();
             })
-            .catch(err =>
+            .catch(err => 
             {
                 this.showAlert(err.message);
             });
@@ -76,7 +76,7 @@ export default class GrantItemFrom extends React.Component
     showAlert = (message) =>
     {
         this.setState({
-            alerMessage: message,
+            alertMessage: message,
             alertColor: "danger",
             alertVisible: true
         });
@@ -98,7 +98,7 @@ export default class GrantItemFrom extends React.Component
             <Button variant="primary" type="submit">Grant</Button>
 
             <Alert style={{ marginTop: "10px" }} variant={this.state.alertColor} show={this.state.alertVisible}>
-                {this.state.alertMerssage}
+                {this.state.alertMessage}
             </Alert>
         </Form>;
     }
