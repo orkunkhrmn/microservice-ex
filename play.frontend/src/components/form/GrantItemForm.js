@@ -31,7 +31,7 @@ export default class GrantItemFrom extends React.Component
         e.preventDefault();
 
         const form = e.currentTarget;
-        if (form.checkValidatiy() === false)
+        if (form.checkValidity() === false)
         {
             e.stopPropagation();
         }
